@@ -11,8 +11,8 @@ app.use(bodyParser.urlencoded({ extended: true }))
 const db = await sqlite(env.DB_PATH)
 
 app.get('/:table/where', async (req, res) => {
-  console.log(`GET ${req.params.table}/where ${JSON.stringify(req.body)}`)
-  const { data, err } = await db.read(req.params.table, req.body)
+  console.log(`GET ${req.params.table}/where ${JSON.stringify(req.query || req.body)}`)
+  const { data, err } = await db.read(req.params.table, req.query || req.body)
   
   if (err) {
     res.status(400)
