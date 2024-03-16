@@ -2,7 +2,7 @@
   "name": "todomap-be",
   "version": "1.0.0",
   "author": "dovaogedot",
-  "license": "MIT",
+  "license": "WTFPL",
   "private": true,
   "type": "module",
   "devDependencies": {
@@ -13,6 +13,6 @@
     "sqlite3": "^5.1.7"
   },
   "scripts": {
-    "dev": "nodemon --env-file=.env src/app.js"
+    "dev": "nodemon src/app.js"
   }
 }
