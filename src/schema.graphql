@@ -1,0 +1,168 @@
+type User {
+  id: ID!
+  name: String!
+  color: String!
+  boards: [Board!]!
+  createdTasks: [Task!]!
+  assignedTo: [Task!]!
+  columns: [Column!]!
+  comments: [Comment!]!
+}
+
+type Board {
+  id: ID!
+  name: String!
+  description: String
+  creator: User!
+  participants: [User!]!
+  columns: [Column!]!
+  tasks: [Task!]!
+}
+
+type Column {
+  id: ID!
+  name: String!
+  description: String
+  displayOrder: Int!
+  color: String
+  creator: User!
+  board: Board!
+  tasks: [Task!]!
+}
+
+type Task {
+  id: ID!
+  name: String!
+  description: String
+  dateCreated: Int!
+  dateUpdated: Int
+  priority: Int!
+  column: Column!
+  creator: User!
+  assignee: User
+  comments: [Comment!]!
+  tags: [Tag!]!
+}
+
+type Comment {
+  id: ID!
+  content: String!
+  creator: User!
+  task: Task!
+  dateCreated: Int!
+  dateUpdated: Int
+}
+
+type Tag {
+  id: ID!
+  name: String!
+  tasks: [Task!]!
+}
+
+input CreateUserInput {
+  name: String!
+  color: String
+}
+input UpdateUserInput {
+  name: String
+  color: String
+}
+
+input CreateBoardInput {
+  name: String!
+  description: String
+  creator_id: ID!
+}
+input UpdateBoardInput {
+  name: String
+  description: String
+}
+
+input CreateColumnInput {
+  name: String!
+  description: String
+  display_order: Int!
+  color: String
+  creator_id: ID!
+  boardId: ID!
+}
+input UpdateColumnInput {
+  name: String
+  description: String
+  display_order: Int
+  color: String
+}
+
+input CreateTaskInput {
+  name: String!
+  description: String
+  priority: Int!
+  column_id: ID!
+  creator_id: ID!
+}
+input UpdateTaskInput {
+  name: String
+  description: String
+  date_updated: Int
+  priority: Int
+  columnId: ID
+}
+
+input CreateCommentInput {
+  content: String!
+  creator_id: ID!
+  task_id: ID!
+}
+input UpdateCommentInput {
+  content: String!
+  date_updated: Int
+}
+
+input CreateTagInput {
+  name: String!
+}
+input UpdateTagInput {
+  name: String!
+}
+
+type Query {
+  users: [User!]!
+  boards: [Board!]!
+  columns: [Column!]!
+  tasks: [Task!]!
+  comments: [Comment!]!
+  tags: [Tag!]!
+
+  user(id: ID!): User
+  board(id: ID!): Board
+  column(id: ID!): Column
+  task(id: ID!): Task
+  comment(id: ID!): Comment
+  tag(id: ID!): Tag
+}
+
+type Mutation {
+  createUser(user: CreateUserInput!): User!
+  updateUser(id: ID!, user: UpdateUserInput!): User!
+  deleteUser(id: ID!): ID!
+
+  createBoard(board: CreateBoardInput!): Board!
+  updateBoard(id: ID!, board: UpdateBoardInput!): Board!
+  deleteBoard(id: ID!): ID!
+
+  createColumn(column: CreateColumnInput!): Column!
+  updateColumn(id: ID!, column: UpdateColumnInput!): Column!
+  deleteColumn(id: ID!): ID!
+
+  createTask(task: CreateTaskInput!): Task!
+  updateTask(id: ID!, task: UpdateTaskInput!): Task!
+  deleteTask(id: ID!): ID!
+
+  createComment(icomment: CreateCommentInput!): Comment!
+  updateComment(id: ID!, comment: UpdateCommentInput!): Comment!
+  deleteComment(id: ID!): ID!
+
+  createTag(tag: CreateTagInput!): Tag!
+  updateTag(id: ID!, tag: UpdateTagInput!): Tag!
+  deleteTag(id: ID!): ID!
+}

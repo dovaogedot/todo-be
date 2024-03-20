@@ -6,13 +6,23 @@
   "private": true,
   "type": "module",
   "devDependencies": {
-    "body-parser": "^1.20.2",
-    "express": "^4.18.3",
-    "nodemon": "^3.1.0",
+    "@apollo/server": "^4.10.1",
+    "@graphql-codegen/cli": "5.0.2",
+    "@graphql-codegen/typescript": "4.0.6",
+    "@graphql-codegen/typescript-resolvers": "4.0.6",
+    "@types/node": "^20.11.28",
+    "@types/pg": "^8.11.3",
+    "@types/sqlite3": "^3.1.11",
+    "graphql": "^16.8.1",
+    "pg": "^8.11.3",
     "sqlite": "^5.1.1",
-    "sqlite3": "^5.1.7"
+    "sqlite3": "^5.1.7",
+    "typescript": "^5.4.2"
   },
   "scripts": {
-    "dev": "nodemon src/app.js"
+    "compile": "tsc",
+    "dev": "npm run generate && tsx watch --env-file=.env src/app.ts",
+    "start": "npm run generate && npm run compile && node --env-file=.env dist/main.js",
+    "generate": "graphql-codegen --config codegen.yml"
   }
 }

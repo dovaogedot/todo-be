@@ -3,3 +3,5 @@
 !.gitignore
 !package.json
 !yarn.lock
+!codegen.yml
+!tsconfig.json
