@@ -1,7 +1,7 @@
 import pg from 'pg'
-import { IRepository } from '../IRepository'
+import { ICrudRepository } from '../ICrudRepository'
 
-export class PostgresTableRepository<CI extends {}, UI extends {}, O> implements IRepository<CI, UI, O> {
+export class PostgresTableRepository<CI extends {}, UI extends {}, O> implements ICrudRepository<CI, UI, O> {
   constructor(
     protected client: pg.Client,
     protected table: string) {}

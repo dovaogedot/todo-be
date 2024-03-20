@@ -1,4 +1,4 @@
-export interface IRepository<CI extends {}, UI extends {}, O> {
+export interface ICrudRepository<CI extends {}, UI extends {}, O> {
   getAll: () => Promise<O[]>
   get: (id: string) => Promise<O>
   create: (input: CI) => Promise<O>

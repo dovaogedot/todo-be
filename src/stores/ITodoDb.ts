@@ -1,13 +1,10 @@
-import { Board, Column, Comment, CreateBoardInput, CreateColumnInput, CreateCommentInput, CreateTagInput, CreateTaskInput, CreateUserInput, Tag, Task, UpdateBoardInput, UpdateColumnInput, UpdateCommentInput, UpdateTagInput, UpdateTaskInput, UpdateUserInput, User } from "../resolvers/resolver-types"
-import { IBoardRepository } from "./IBoardRepository"
-import { IRepository } from "./IRepository"
-import { IUserRepository } from "./IUserRepository"
+import { IBoardRepository, IColumnRepository, ICommentRepository, ITagRepository, ITaskRepository, IUserRepository } from "./IRepositories"
 
 export interface ITodoDb {
   users: IUserRepository
   boards: IBoardRepository
-  columns: IRepository<CreateColumnInput, UpdateColumnInput, Column>
-  tasks: IRepository<CreateTaskInput, UpdateTaskInput, Task>
-  comments: IRepository<CreateCommentInput, UpdateCommentInput, Comment>
-  tags: IRepository<CreateTagInput, UpdateTagInput, Tag>
+  columns: IColumnRepository
+  tasks: ITaskRepository
+  comments: ICommentRepository
+  tags: ITagRepository
 }

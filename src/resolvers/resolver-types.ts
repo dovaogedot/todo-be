@@ -25,7 +25,6 @@ export type Board = {
   id: Scalars['ID']['output'];
   name: Scalars['String']['output'];
   participants: Array<User>;
-  tasks: Array<Task>;
 };
 
 export type Column = {
@@ -310,7 +309,7 @@ export type UpdateUserInput = {
 
 export type User = {
   __typename?: 'User';
-  assignedTo: Array<Task>;
+  assignedTasks: Array<Task>;
   boards: Array<Board>;
   color: Scalars['String']['output'];
   columns: Array<Column>;
@@ -452,7 +451,6 @@ export type BoardResolvers<ContextType = MyContext, ParentType extends Resolvers
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   participants?: Resolver<Array<ResolversTypes['User']>, ParentType, ContextType>;
-  tasks?: Resolver<Array<ResolversTypes['Task']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -537,7 +535,7 @@ export type TaskResolvers<ContextType = MyContext, ParentType extends ResolversP
 };
 
 export type UserResolvers<ContextType = MyContext, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = {
-  assignedTo?: Resolver<Array<ResolversTypes['Task']>, ParentType, ContextType>;
+  assignedTasks?: Resolver<Array<ResolversTypes['Task']>, ParentType, ContextType>;
   boards?: Resolver<Array<ResolversTypes['Board']>, ParentType, ContextType>;
   color?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   columns?: Resolver<Array<ResolversTypes['Column']>, ParentType, ContextType>;

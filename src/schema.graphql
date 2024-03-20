@@ -4,7 +4,7 @@ type User {
   color: String!
   boards: [Board!]!
   createdTasks: [Task!]!
-  assignedTo: [Task!]!
+  assignedTasks: [Task!]!
   columns: [Column!]!
   comments: [Comment!]!
 }
@@ -16,7 +16,6 @@ type Board {
   creator: User!
   participants: [User!]!
   columns: [Column!]!
-  tasks: [Task!]!
 }
 
 type Column {
