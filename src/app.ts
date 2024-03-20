@@ -7,7 +7,6 @@ import { ITodoDb } from './stores/ITodoDb'
 import { resolvers } from './resolvers/resolvers'
 import { PostgresTodoDb } from './stores/postgres/PostgresTodoDb'
 import { SqliteDb } from './stores/sqlite/sqliteDb'
-import { Logger } from './logging'
 
 export interface MyContext {
   db: ITodoDb
