@@ -28,6 +28,8 @@ export interface ITaskRepository extends ICrudRepository<CreateTaskInput, Update
   assignee: (id: string) => Promise<User>
   comments: (id: string) => Promise<Comment[]>
   tags: (id: string) => Promise<Tag[]>
+  addTag: (tag_id: string, task_id: string) => Promise<Task>
+  removeTag: (tag_id: string, task_id: string) => Promise<Task>
 }
 
 export interface ICommentRepository extends ICrudRepository<CreateCommentInput, UpdateCommentInput, Comment> {

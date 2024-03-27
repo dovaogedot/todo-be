@@ -56,7 +56,7 @@ export type CreateBoardInput = {
 };
 
 export type CreateColumnInput = {
-  boardId: Scalars['ID']['input'];
+  board_id: Scalars['ID']['input'];
   color?: InputMaybe<Scalars['String']['input']>;
   creator_id: Scalars['ID']['input'];
   description?: InputMaybe<Scalars['String']['input']>;
@@ -89,6 +89,7 @@ export type CreateUserInput = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  addTag: Task;
   createBoard: Board;
   createColumn: Column;
   createComment: Comment;
@@ -101,12 +102,19 @@ export type Mutation = {
   deleteTag: Scalars['ID']['output'];
   deleteTask: Scalars['ID']['output'];
   deleteUser: Scalars['ID']['output'];
+  removeTag: Task;
   updateBoard: Board;
   updateColumn: Column;
   updateComment: Comment;
   updateTag: Tag;
   updateTask: Task;
   updateUser: User;
+};
+
+
+export type MutationAddTagArgs = {
+  tag_id?: InputMaybe<Scalars['ID']['input']>;
+  task_id?: InputMaybe<Scalars['ID']['input']>;
 };
 
 
@@ -167,6 +175,12 @@ export type MutationDeleteTaskArgs = {
 
 export type MutationDeleteUserArgs = {
   id: Scalars['ID']['input'];
+};
+
+
+export type MutationRemoveTagArgs = {
+  tag_id?: InputMaybe<Scalars['ID']['input']>;
+  task_id?: InputMaybe<Scalars['ID']['input']>;
 };
 
 
@@ -295,7 +309,8 @@ export type UpdateTagInput = {
 };
 
 export type UpdateTaskInput = {
-  columnId?: InputMaybe<Scalars['ID']['input']>;
+  assignee_id?: InputMaybe<Scalars['ID']['input']>;
+  column_id?: InputMaybe<Scalars['ID']['input']>;
   date_updated?: InputMaybe<Scalars['Int']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
@@ -478,6 +493,7 @@ export type CommentResolvers<ContextType = MyContext, ParentType extends Resolve
 };
 
 export type MutationResolvers<ContextType = MyContext, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
+  addTag?: Resolver<ResolversTypes['Task'], ParentType, ContextType, Partial<MutationAddTagArgs>>;
   createBoard?: Resolver<ResolversTypes['Board'], ParentType, ContextType, RequireFields<MutationCreateBoardArgs, 'input'>>;
   createColumn?: Resolver<ResolversTypes['Column'], ParentType, ContextType, RequireFields<MutationCreateColumnArgs, 'input'>>;
   createComment?: Resolver<ResolversTypes['Comment'], ParentType, ContextType, RequireFields<MutationCreateCommentArgs, 'input'>>;
@@ -490,6 +506,7 @@ export type MutationResolvers<ContextType = MyContext, ParentType extends Resolv
   deleteTag?: Resolver<ResolversTypes['ID'], ParentType, ContextType, RequireFields<MutationDeleteTagArgs, 'id'>>;
   deleteTask?: Resolver<ResolversTypes['ID'], ParentType, ContextType, RequireFields<MutationDeleteTaskArgs, 'id'>>;
   deleteUser?: Resolver<ResolversTypes['ID'], ParentType, ContextType, RequireFields<MutationDeleteUserArgs, 'id'>>;
+  removeTag?: Resolver<ResolversTypes['Task'], ParentType, ContextType, Partial<MutationRemoveTagArgs>>;
   updateBoard?: Resolver<ResolversTypes['Board'], ParentType, ContextType, RequireFields<MutationUpdateBoardArgs, 'id' | 'input'>>;
   updateColumn?: Resolver<ResolversTypes['Column'], ParentType, ContextType, RequireFields<MutationUpdateColumnArgs, 'id' | 'input'>>;
   updateComment?: Resolver<ResolversTypes['Comment'], ParentType, ContextType, RequireFields<MutationUpdateCommentArgs, 'id' | 'input'>>;

@@ -20,7 +20,8 @@ export class PostgresGenericRepository<CI extends {}, UI extends {}, O> implemen
     const columns = Object.keys(input)
     const params = Object.values(input) as string[]
     const values = params.map((_, i) => `$${i + 1}`)
-    
+    console.log(columns)
+    console.log(params)
     const { rows } = await this.client.query(`INSERT INTO ${this.table} (${columns.join(',')}) VALUES (${values.join(',')}) RETURNING *`, params)
     return rows[0]
   }

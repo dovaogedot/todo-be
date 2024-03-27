@@ -166,4 +166,7 @@ type Mutation {
   createTag(input: CreateTagInput!): Tag!
   updateTag(id: ID!, input: UpdateTagInput!): Tag!
   deleteTag(id: ID!): ID!
+
+  addTag(tag_id: ID, task_id: ID): Task!
+  removeTag(tag_id: ID, task_id: ID): Task!
 }

@@ -47,4 +47,16 @@ export class PostgresTaskRepository
     WHERE tasks_tags.task_id=$1 AND tags.deleted=false`, [id])
     return rows
   }
+
+  async addTag(tag_id: string, task_id: string): Promise<Task> {
+    await this.client.query(`INSERT INTO tasks_tags (tag_id, task_id) VALUES ($1, $2)`, [tag_id, task_id])
+    const { rows } = await this.client.query(`SELECT * FROM tasks WHERE id=$1`, [task_id])
+    return rows[0]
+  }
+
+  async removeTag(tag_id: string, task_id: string): Promise<Task> {
+    await this.client.query(`DELETE FROM tasks_tags WHERE tag_id=$1 AND task_id=$2`, [tag_id, task_id])
+    const { rows } = await this.client.query(`SELECT * FROM tasks WHERE id=$1`, [task_id])
+    return rows[0]
+  }
 }
