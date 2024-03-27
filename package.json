@@ -12,6 +12,7 @@
     "@graphql-codegen/typescript-resolvers": "4.0.6",
     "@graphql-tools/mock": "^9.0.2",
     "@graphql-tools/schema": "^10.0.3",
+    "@types/jest": "^29.5.12",
     "@types/node": "^20.11.28",
     "@types/pg": "^8.11.3",
     "@types/sqlite3": "^3.1.11",
@@ -26,9 +27,9 @@
   },
   "scripts": {
     "compile": "tsc",
-    "dev": "npm run generate && tsx watch --env-file=.env src/app.ts",
-    "start": "npm run generate && npm run compile && node --env-file=.env dist/main.js",
+    "dev": "npm run generate && tsx watch src/app.ts",
+    "start": "npm run generate && npm run compile && node dist/main.js",
     "generate": "graphql-codegen --config codegen.yml",
-    "test": "jest --config jest.config.ts "
+    "test": "jest --config jest.config.js --forceExit --verbose"
   }
 }

@@ -2,7 +2,8 @@ import { Board, Column, Comment, CreateBoardInput, CreateColumnInput, CreateComm
 import { ICrudRepository } from "./ICrudRepository"
 
 export interface IUserRepository extends ICrudRepository<CreateUserInput, UpdateUserInput, User> {
-  boards: (id: string) => Promise<Board[]>
+  createdBoards: (id: string) => Promise<Board[]>
+  participatedBoards: (id: string) => Promise<Board[]>
   createdTasks: (id: string) => Promise<Task[]>
   assignedTasks: (id: string) => Promise<Task[]>
   columns: (id: string) => Promise<Column[]>

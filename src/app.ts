@@ -4,13 +4,16 @@ import { readFile } from 'fs/promises'
 import sqlite from 'sqlite3'
 import pg from 'pg'
 import { ITodoDb } from './stores/ITodoDb'
-import { resolvers } from './resolvers/resolvers'
+import resolvers from './resolvers/resolvers'
 import { PostgresTodoDb } from './stores/postgres/PostgresTodoDb'
 import { SqliteDb } from './stores/sqlite/sqliteDb'
+import { GraphQLResolveInfo } from 'graphql'
 
 export interface MyContext {
-  db: ITodoDb
-  log: (handler: any) => void
+  dataSources: {
+    db: ITodoDb
+  }
+  log: (info: GraphQLResolveInfo) => void
 }
 
 console.log(`🗃️ Database located at: ${process.env.TODODB_USER}:password@${process.env.TODODB_HOST}:${process.env.TODODB_PORT}/${process.env.TODODB_DBNAME}.`)
@@ -22,7 +25,7 @@ const postgresClient = new pg.Client({
   user: process.env.TODODB_USER,
   password: process.env.TODODB_PASS
 })
-postgresClient.connect()
+postgresClient.connect() // fix this
 
 const sqliteDb = new SqliteDb({
   filename: process.env.DB_PATH || 'db.sqlite',
@@ -37,16 +40,32 @@ const server = new ApolloServer<MyContext>({
 })
 
 const { url } = await startStandaloneServer(server, {
-  context: async (params: any) => {
+  context: async (params) => {
+    // @ts-ignore
     if (params.req.body.operationName != 'IntrospectionQuery') {
-      console.log('❔ Request:')
+      console.log('\n')
+      console.log(` --- Request --- `)
+      console.log('\n')
+
+      console.log(`🟦 Query: `)
+      // @ts-ignore
       console.log(params.req.body.query)
+      console.log('\n')
+
+      console.log(`🟦 Variables: `)
+      // @ts-ignore
       console.log(params.req.body.variables)
+      console.log('\n')
+      
+      console.log(`🟦 Routed to: `)
     }
+
     return {
-      db: new PostgresTodoDb(postgresClient),
-      log: handler => {
-        console.log(`❕ Routed to '${handler}'.`)
+      dataSources: {
+        db: new PostgresTodoDb(postgresClient),
+      },
+      log: (info) => {
+        console.log(`${info.path.typename}/${info.path.key}`)
       }
     }
   },

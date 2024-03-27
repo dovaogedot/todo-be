@@ -1,12 +1,12 @@
 import pg from 'pg'
 import { ITodoDb } from '../ITodoDb'
 import { IBoardRepository, IColumnRepository, ICommentRepository, ITagRepository, ITaskRepository, IUserRepository } from '../IRepositories'
-import { PostgresUserRepository } from './PostgresUserRepository'
-import { PostgresBoardRepository } from './PostgresBoardRepository'
-import { PostgresColumnRepository } from './PostgresColumnRepository'
-import { PostgresTaskRepository } from './PostgresTaskRepostory'
-import { PostgresCommentRepository } from './PostgresCommentRepository'
-import { PostgresTagRepository } from './PostgresTagRepository'
+import { PostgresUserRepository } from './repositories/PostgresUserRepository'
+import { PostgresBoardRepository } from './repositories/PostgresBoardRepository'
+import { PostgresColumnRepository } from './repositories/PostgresColumnRepository'
+import { PostgresTaskRepository } from './repositories/PostgresTaskRepostory'
+import { PostgresCommentRepository } from './repositories/PostgresCommentRepository'
+import { PostgresTagRepository } from './repositories/PostgresTagRepository'
 
 export class PostgresTodoDb implements ITodoDb {
   users: IUserRepository

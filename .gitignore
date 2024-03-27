@@ -5,4 +5,4 @@
 !yarn.lock
 !codegen.yml
 !tsconfig.json
-!jest.config.ts
+!jest.config.js

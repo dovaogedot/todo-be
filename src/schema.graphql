@@ -2,7 +2,8 @@ type User {
   id: ID!
   name: String!
   color: String!
-  boards: [Board!]!
+  createdBoards: [Board!]!
+  participatedBoards: [Board!]!
   createdTasks: [Task!]!
   assignedTasks: [Task!]!
   columns: [Column!]!
@@ -80,7 +81,7 @@ input UpdateBoardInput {
 input CreateColumnInput {
   name: String!
   description: String
-  display_order: Int!
+  display_order: Int
   color: String
   creator_id: ID!
   boardId: ID!
@@ -95,7 +96,7 @@ input UpdateColumnInput {
 input CreateTaskInput {
   name: String!
   description: String
-  priority: Int!
+  priority: Int
   column_id: ID!
   creator_id: ID!
 }
@@ -141,27 +142,27 @@ type Query {
 }
 
 type Mutation {
-  createUser(user: CreateUserInput!): User!
-  updateUser(id: ID!, user: UpdateUserInput!): User!
+  createUser(input: CreateUserInput!): User!
+  updateUser(id: ID!, input: UpdateUserInput!): User!
   deleteUser(id: ID!): ID!
 
-  createBoard(board: CreateBoardInput!): Board!
-  updateBoard(id: ID!, board: UpdateBoardInput!): Board!
+  createBoard(input: CreateBoardInput!): Board!
+  updateBoard(id: ID!, input: UpdateBoardInput!): Board!
   deleteBoard(id: ID!): ID!
 
-  createColumn(column: CreateColumnInput!): Column!
-  updateColumn(id: ID!, column: UpdateColumnInput!): Column!
+  createColumn(input: CreateColumnInput!): Column!
+  updateColumn(id: ID!, input: UpdateColumnInput!): Column!
   deleteColumn(id: ID!): ID!
 
-  createTask(task: CreateTaskInput!): Task!
-  updateTask(id: ID!, task: UpdateTaskInput!): Task!
+  createTask(input: CreateTaskInput!): Task!
+  updateTask(id: ID!, input: UpdateTaskInput!): Task!
   deleteTask(id: ID!): ID!
 
-  createComment(icomment: CreateCommentInput!): Comment!
-  updateComment(id: ID!, comment: UpdateCommentInput!): Comment!
+  createComment(input: CreateCommentInput!): Comment!
+  updateComment(id: ID!, input: UpdateCommentInput!): Comment!
   deleteComment(id: ID!): ID!
 
-  createTag(tag: CreateTagInput!): Tag!
-  updateTag(id: ID!, tag: UpdateTagInput!): Tag!
+  createTag(input: CreateTagInput!): Tag!
+  updateTag(id: ID!, input: UpdateTagInput!): Tag!
   deleteTag(id: ID!): ID!
 }
