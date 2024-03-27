@@ -106,6 +106,7 @@ input UpdateTaskInput {
   date_updated: Int
   priority: Int
   column_id: ID
+  assignee_id: ID
 }
 
 input CreateCommentInput {

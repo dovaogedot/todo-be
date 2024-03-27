@@ -41,7 +41,6 @@ const resolvers = entities.map(e => ({
     [`create${e.name}`]: async (_: {}, args: { input: any }, context: MyContext, info: GraphQLResolveInfo) => {
       context.log(info)
       const entity = context.dataSources.db[e.tables as keyof ITodoDb].create(args.input)
-      console.log(entity)
       return entity
     },
     [`update${e.name}`]: async (_: {}, args: { id: string, input: any }, context: MyContext, info: GraphQLResolveInfo) => {
