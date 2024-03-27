@@ -84,7 +84,7 @@ input CreateColumnInput {
   display_order: Int
   color: String
   creator_id: ID!
-  boardId: ID!
+  board_id: ID!
 }
 input UpdateColumnInput {
   name: String
@@ -105,7 +105,7 @@ input UpdateTaskInput {
   description: String
   date_updated: Int
   priority: Int
-  columnId: ID
+  column_id: ID
 }
 
 input CreateCommentInput {
